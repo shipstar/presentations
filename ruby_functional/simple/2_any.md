@@ -3,7 +3,6 @@
 # any? #
 
     @@@ ruby
-
     [1, 2, 3, 4].any?{ |n| n.even? }
     # => true
 
