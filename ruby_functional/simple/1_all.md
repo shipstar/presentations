@@ -3,7 +3,7 @@
 # all? #
 
     @@@ ruby
-
+    
     [2, 4, 6, 8].all?{ |n| n.even? }
     # => true
 
