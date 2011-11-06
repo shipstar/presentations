@@ -8,3 +8,6 @@
 
     [2, 4, 6, 8].any?{ |n| n.odd? }
     # => false
+
+    [stalin, mccarthy].any?(&:communist?)
+    # => true

@@ -3,10 +3,9 @@
   "description": "What the title says",
   "sections": [
     { "section": "simple" },
+    { "section": "sorting" },
     { "section": "bread_and_butter" },
-    { "section": "sorting" }
-
+    { "section": "good_to_know" }
     //{ "section": "chaining" },
-    //{ "section": "good_to_know" }
   ]
 }

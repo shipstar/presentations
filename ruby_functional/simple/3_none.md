@@ -8,3 +8,7 @@
 
     [1, 2, 3, 4].none?{ |n| n.even? }
     # => false
+
+    [obama, clinton].none?(&:communist?)
+    # => raise MaybeCommunistException
+    # I mean => true

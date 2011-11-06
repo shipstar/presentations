@@ -9,4 +9,7 @@
     [1, 3, 5, 7].detect{ |n| n.even? }
     # => nil
 
+    [roosevelt, hitler, tojo].detect(&:axis?)
+    # => hitler
+
 ### Warning! Rails overrides find for ActiveRecord proxies!
