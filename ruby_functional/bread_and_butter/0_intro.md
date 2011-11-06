@@ -1,6 +1,6 @@
 !SLIDE bullets
 
-# Your bread and butter #
+# Bread and butter #
 
 * find/detect
 * select

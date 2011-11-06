@@ -12,4 +12,4 @@
     [roosevelt, hitler, tojo].detect(&:axis?)
     # => hitler
 
-### Warning! Rails overrides find for ActiveRecord proxies!
+Warning! Rails overrides find for ActiveRecord proxies!
