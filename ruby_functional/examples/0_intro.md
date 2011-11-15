@@ -102,3 +102,5 @@ This is how we added some helper methods like create\_manual\_scan\_audit\_task 
 Presentation by showoff (<https://github.com/schacon/showoff>)
 
 Source available at <https://github.com/shipstar/presentations>
+
+A better presentation at <http://speakerdeck.com/u/tomstuart/p/thinking-functionally-in-ruby>
