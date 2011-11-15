@@ -1,10 +1,36 @@
 # Examples #
 
-Warning! Real-world examples from Giggil.
+!SLIDE small
+
+# String parsing
+
+    @@@ ruby
+    records = File
+      .open("file", 'r')
+      .readlines
+      .map(&:chomp)
+      .map{ |line| line.gsub("-", "_" ).split("\t") }
+
+!SLIDE
+
+## Warning! Real-world examples from Giggil.
 
 !SLIDE smaller
 
-# Amazon shipping fee calculations
+# Exclude non-media results
+
+    @@@ ruby
+    MEDIA = ["DVD", "Music", "Software", "Video Games", "Book"]
+    
+    filtered_results = search
+      .results
+      .select{ |r| MEDIA.include? r[:product_group] }
+
+!SLIDE smaller
+
+**Amazon Shipping Fee Calculations**
+
+An item is **overweight** if (1) weight or dimensional weight > 20, (2) the shortest dimension is greater than 8, (3) the median dimension is greater than 14, OR (4) the longest dimension is greater than 20.
 
     @@@ ruby
     MAX_WEIGHT = 20
@@ -63,12 +89,16 @@ This is how we added some helper methods like create\_manual\_scan\_audit\_task 
       end
     end
 
-(Normally you wouldn't want to call map(&:name) on an ActiveRecord list, but there's only about 15 AuditTaskTypes. If you have a bigger list, use ActiveRecord::Base.connection.select_values instead.)
+(Normally you wouldn't want to call map(&:name) on an ActiveRecord list, but there's only about 15 AuditTaskTypes. If you have a bigger list, use ActiveRecord::Base.connection.select_values instead.)  
+
+!SLIDE
+
+# Now everything is a nail!
 
 !SLIDE
 
 # Questions?
 
-Presentation by showoff (https://github.com/schacon/showoff)
+Presentation by showoff (<https://github.com/schacon/showoff>)
 
-Source available at https://github.com/shipstar/presentations
+Source available at <https://github.com/shipstar/presentations>

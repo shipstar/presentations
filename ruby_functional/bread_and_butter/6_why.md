@@ -1,4 +1,4 @@
-!SLIDE
+!SLIDE small
 
 # Why
 
@@ -16,13 +16,13 @@ Idiomatic:
     @@@ ruby
     array.detect(&:matches_condition?)
 
-!SLIDE bullet small
+!SLIDE bullet smaller
 
 # Why
 
 * find/detect, select, reject, map/collect, and inject/reduce refer to specific concepts
   * select, reject = apply a filter
-  * map = transform each element and collect the results
+  * map = apply a function each element and collect the results
   * inject = collapse a list into a single value
 * less state
   * not needed most of the time

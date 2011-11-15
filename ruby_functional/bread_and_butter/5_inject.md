@@ -1,4 +1,4 @@
-!SLIDE
+!SLIDE small
 
 # inject (aka reduce) #
 
@@ -14,4 +14,6 @@
     #  "Chad" => -2
     # }
 
-### Don't forget to return the memo!
+Don't forget to return the memo!
+
+Really useful for converting arrays to hashes!

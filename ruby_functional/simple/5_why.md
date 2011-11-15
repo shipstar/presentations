@@ -1,9 +1,8 @@
-!SLIDE
+!SLIDE small
 
 # Why
 
 Take all?, for example. Java-ish Ruby:
-
     @@@ ruby
     def all_odd?(array)
       array.each do |element|
