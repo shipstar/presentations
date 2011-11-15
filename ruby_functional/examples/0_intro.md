@@ -91,9 +91,20 @@ This is how we added some helper methods like create\_manual\_scan\_audit\_task 
 
 (Normally you wouldn't want to call map(&:name) on an ActiveRecord list, but there's only about 15 AuditTaskTypes. If you have a bigger list, use ActiveRecord::Base.connection.select_values instead.)  
 
+!SLIDE small
+
+# Summary
+
+* Enumerable is great
+* Use these methods liberally
+* Fewer LOC = more maintainable software
+  * But no golfing!
+* State is overrated
+  * Especially as systems become more concurrent
+
 !SLIDE
 
-# Now everything is a nail!
+# Enjoy your hammer!
 
 !SLIDE
 
