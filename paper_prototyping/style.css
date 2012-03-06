@@ -1,0 +1,17 @@
+.footnote {
+  font-size: 18px;
+  margin-top: 12px;
+  color: #666;
+}
+
+p + .footnote, h1 + .footnote, h2 + .footnote {
+  text-align: center;
+}
+
+img {
+  max-width: 800px;
+}
+
+h1 {
+  color: #AA3939;
+}
