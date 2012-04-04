@@ -19,3 +19,7 @@ img {
 h1 {
   color: #AA3939;
 }
+
+.smbullets > ul > li {
+  text-align: left;
+}
