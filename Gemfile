@@ -1,3 +1,3 @@
 source :rubygems
 
-gem 'showoff'
+gem 'showoff', :git => 'git://github.com/schacon/showoff.git'
