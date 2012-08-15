@@ -101,7 +101,8 @@ Multiple signatures:
 
     context.drawImage img, x, y, w, h
 
-    context.drawImage img, sx, sy, sw, sh, x, y, w, h
+    context.drawImage img, sx, sy, sw, sh,
+                            x,  y,  w,  h
 
 !SLIDE small
 
@@ -119,7 +120,7 @@ Multiple signatures:
 
 !SLIDE small
 
-## Drawing a circle
+## Drawing a light blue circle
 
     @@@ coffeescript
 
@@ -140,7 +141,7 @@ Multiple signatures:
 
 !SLIDE small
 
-## Rotations + push/pop context
+## Making something wobble (+ push/pop context)
 
     @@@ coffeescript
 
