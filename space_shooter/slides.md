@@ -50,6 +50,7 @@ j/k
 * Drawing Context
 * Drawing Commands
 * Sprites
+* Keyboard Handling
 * Game Loop
 
 !SLIDE
@@ -153,3 +154,56 @@ Multiple signatures:
     context.restore()
 
 (Kind of like OpenGL transformation matrices)
+
+!SLIDE small
+
+## Sprites
+
+    @@@ coffeescript
+
+    sprite = new Image()
+    sprite.src = 'foo.png'
+
+!SLIDE small
+
+## Keyboard handling
+
+    @@@ coffeescript
+
+    # Remember, we used jQuery FOR NO RAISIN.
+
+    $(document).keydown (event) -> # handler
+
+    $(document).keyup (event) -> # handler
+
+    $(document).keypress (event) -> # handler
+
+    $.ui.keyCode.LEFT # or RIGHT, or SPACE
+
+!SLIDE small
+
+## Game Loop
+
+    @@@ coffeescript
+
+    # It turns out that setInterval
+    # is not the best way to do this.
+    # Stay tuned!
+
+    setInterval gameLoop, 17 # ~60 fps
+
+    gameLoop ->
+
+      updateObjects()
+
+      drawObjects() # clearing the canvas first
+
+!SLIDE small
+
+## You now have all of the elements necessary to make a game:
+
+* Draw shapes and images
+
+* Move shapes and images
+
+* Repeat ad nauseum
