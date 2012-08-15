@@ -264,9 +264,34 @@ Collision detection gets harder as the shapes
 <br/>
 get more complex and more objects collide.
 
-!SLIDE
+!SLIDE smaller
 
 ## Anthony's Particle Engine
+
+    @@@ coffeescript
+
+    particles = []
+    ttl = 200 * Math.random() + 200
+
+    for i in [0..9]
+      for j in [0..9]
+        particles.push
+          velocity:
+            x: Math.random() * 2 - 1
+            y: Math.random() * 2 + ySpeed
+          position:
+            x: systemX + i * 3
+            y: systemY + j * 3
+          width: 3
+          height: 3
+          timeToLive: ttl
+          originalTimeToLive: ttl
+          expired: false
+
+    particleSystems.push
+      expired: false
+      particles: particles
+      color: color
 
 !SLIDE small
 
