@@ -44,56 +44,111 @@ j/k
 
 !SLIDE
 
+## Core concepts:
+
+* Canvas
+* Drawing Context
+* Drawing Commands
+* Sprites
+* Game Loop
+
+!SLIDE
+
 ## Coffeescript Warning!
 
 <div class="footnote">(That's why we did this.)</div>
 
 !SLIDE small
 
-## We need a drawing context.
+## Canvas
 
     @@@ coffeescript
 
-    $ ->
+    # Note: You don't have to use jQuery,
+    # and we're kind of idiots for doing it.
 
-      canvas = $("canvas#game")
-
-      context = canvas.get(0).getContext("2d")
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-(We'll be using this a lot.)
+    canvas = $('canvas#game')
 
 !SLIDE small
 
-## Now that we have a context, let's draw something.
+## Drawing context
 
     @@@ coffeescript
 
-    context.fillRect(50, 25, 150, 100) # x, y, w, h
+    context = canvas.get(0).getContext('2d')
 
 !SLIDE
 
-## Let's make it move.
+## Drawing commands
 
-!SLIDE
+!SLIDE small
 
-## But first!
-
-We need a game loop.
+## fillRect
 
     @@@ coffeescript
 
-    gameLoop ->
+    context.fillRect x, y, w, h
 
-      drawRect()
-      clearCanvas()
+!SLIDE small
 
-    clearCanvas = ->
+## drawImage
 
-      context.clearRect(0, 0, canvas.width(), canvas.height())
+Multiple signatures:
 
-    setInterval gameLoop, 17 # ~60 fps
+    @@@ coffeescript
+
+    context.drawImage img, x, y
+
+    context.drawImage img, x, y, w, h
+
+    context.drawImage img, sx, sy, sw, sh, x, y, w, h
+
+!SLIDE small
+
+## clearRect
+
+    @@@ coffeescript
+
+    context.clearRect x, y, w, h
+
+(You'll need this for your game loop.)
+
+!SLIDE
+
+## More complicated examples
+
+!SLIDE small
+
+## Drawing a circle
+
+    @@@ coffeescript
+
+    context.globalAlpha = 1
+
+    context.lineWidth = 25
+
+    context.beginPath()
+
+    context.strokeStyle = "#aaaaff"
+
+    context.arc x, y, radius, startAngle,
+      endAngle, counterClockwise
+
+    context.closePath()
+
+    context.stroke()
+
+!SLIDE small
+
+## Rotations + push/pop context
+
+    @@@ coffeescript
+
+    context.save()
+    context.translate x, y
+    context.rotate angle
+    context.translate -x, -y
+    context.drawImage img, x, y, width, height
+    context.restore()
+
+(Kind of like OpenGL transformation matrices)
