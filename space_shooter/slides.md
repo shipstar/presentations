@@ -42,16 +42,23 @@ j/k
 
 <div class="footnote">(lulz)</div>
 
-!SLIDE
+!SLIDE small
 
-## Core concepts:
+# Core concepts:
 
 * Canvas
 * Drawing Context
 * Drawing Commands
 * Sprites
 * Keyboard Handling
+* Audio
 * Game Loop
+
+!SLIDE
+
+## Amateur Warning!
+
+We've made part of a game once. YMMV.
 
 !SLIDE
 
@@ -72,15 +79,17 @@ j/k
 
 !SLIDE small
 
-## Drawing context
+## Drawing Context
 
     @@@ coffeescript
 
     context = canvas.get(0).getContext('2d')
 
+(There's no 3d -- it's webgl.)
+
 !SLIDE
 
-## Drawing commands
+## Drawing Commands
 
 !SLIDE small
 
@@ -92,21 +101,6 @@ j/k
 
 !SLIDE small
 
-## drawImage
-
-Multiple signatures:
-
-    @@@ coffeescript
-
-    context.drawImage img, x, y
-
-    context.drawImage img, x, y, w, h
-
-    context.drawImage img, sx, sy, sw, sh,
-                            x,  y,  w,  h
-
-!SLIDE small
-
 ## clearRect
 
     @@@ coffeescript
@@ -114,6 +108,20 @@ Multiple signatures:
     context.clearRect x, y, w, h
 
 (You'll need this for your game loop.)
+
+!SLIDE small
+
+## drawImage
+
+    @@@ coffeescript
+
+    context.drawImage img, x, y
+
+    context.drawImage img, x, y, w, h
+
+    # Useful with sprite sheets
+    context.drawImage img, sx, sy, sw, sh,
+                            x,  y,  w,  h
 
 !SLIDE
 
@@ -146,11 +154,19 @@ Multiple signatures:
 
     @@@ coffeescript
 
+    # Note: Translation happens in terms of
+    # the origin, kind of like an OpenGL camera.
+
     context.save()
+
     context.translate x, y
+
     context.rotate angle
+
     context.translate -x, -y
+
     context.drawImage img, x, y, width, height
+
     context.restore()
 
 (Kind of like OpenGL transformation matrices)
@@ -162,11 +178,12 @@ Multiple signatures:
     @@@ coffeescript
 
     sprite = new Image()
+
     sprite.src = 'foo.png'
 
 !SLIDE small
 
-## Keyboard handling
+## Keyboard Handling
 
     @@@ coffeescript
 
@@ -179,6 +196,24 @@ Multiple signatures:
     $(document).keypress (event) -> # handler
 
     $.ui.keyCode.LEFT # or RIGHT, or SPACE
+
+!SLIDE small
+
+## Audio
+
+    @@@ coffeescript
+
+    sound = new Audio("file.wav")
+    
+    sound.play()
+
+    sound.pause()
+
+    # what we did for bgm
+
+    <audio id="bgm" src="sound.ogg" preload autoplay>
+      Audio element not supported.
+    </audio>
 
 !SLIDE small
 
@@ -206,4 +241,51 @@ Multiple signatures:
 
 * Move shapes and images
 
+* Play some sounds
+
 * Repeat ad nauseum
+
+!SLIDE smaller
+
+## Collision Detection
+
+(Fine, fine. You probably need this too.)
+
+    @@@ coffeescript
+
+    rectanglesIntersect = (r1, r2) ->
+      r1.x < r2.x + r2.width  && r1.x + r1.width  > r2.x &&
+      r1.y < r2.y + r2.height && r1.y + r1.height > r2.y
+
+<br/>
+<br/>
+<br/>
+Collision detection gets harder as the shapes
+<br/>
+get more complex and more objects collide.
+
+!SLIDE
+
+## Anthony's Particle Engine
+
+!SLIDE small
+
+## Future Improvements
+
+* Game object instead of global state
+
+* Less coupled algorithms
+
+* Start extracting a game framework
+  * But build a game first
+
+* Better animation
+  * Replace setInterval / clearInterval with requestAnimationFrame / cancelAnimationFrame
+
+!SLIDE
+
+# Questions?
+
+[presentations.kyleshipley.com](http://presentations.kyleshipley.com)
+
+@kyleashipley / @panozzaj
