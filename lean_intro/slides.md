@@ -67,7 +67,7 @@ Be aware of its limitations.
 
 !SLIDE
 
-## Lean is about saving time and money.
+## Lean is about eliminating waste and lowering risk.
 
 <br/><br/>
 Don't build something no one wants.
