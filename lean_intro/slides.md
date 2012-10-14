@@ -90,6 +90,12 @@ Figure it out quickly.
 
 !SLIDE
 
+## MVPs
+
+Minimum AND viable.
+
+!SLIDE
+
 ## Some examples of lean techniques:
 
 * Problem interviews
