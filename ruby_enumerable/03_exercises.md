@@ -57,6 +57,17 @@ My solution:
       end
     end
 
+!SLIDE
+
+Another solution:
+
+    @@@ ruby
+    def count_by_type(animals)
+      Hash[*animals
+        .group_by { |type, _| type }
+        .flat_map { |type, list| [type, list.count] }]
+    end
+
 !SLIDE small
 
 ### 3. An item is overweight if (1) weight or dimensional weight > 20, (2) the shortest dimension is greater than 8, (3) the median dimension is greater than 14, OR (4) the longest dimension is greater than 20.
