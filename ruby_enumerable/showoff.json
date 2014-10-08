@@ -1,0 +1,8 @@
+{
+  "name": "Let's Get Enumerable",
+  "description": "What the title says",
+  "templates": {
+    "underscore": "underscore.tpl"
+  },
+  "sections": ["."]
+}

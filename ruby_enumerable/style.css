@@ -1,0 +1,16 @@
+h1 { color: #AA3939; }
+h2 { color: #AA3939; }
+
+h1 { font-size: 9em; }
+h2 { font-size: 6em; }
+h3 { font-size: 4em; }
+
+.content > p { font-size: 4em; }
+
+a { text-decoration: none; }
+
+img { max-height: 400px; }
+
+.results { font-size: 5em; }
+
+.twitter { color: #55ACEE; }
