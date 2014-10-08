@@ -365,7 +365,7 @@ Bonus: lambdas!
 
     # or as a method
     # def under_age
-    #  Proc.new { |n| n < 21 }
+    #  ->(n) { n < 21 }
     # end
 
 !SLIDE[tpl=underscore] execute
