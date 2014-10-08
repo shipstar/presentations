@@ -65,7 +65,10 @@ Another solution:
     def count_by_type(animals)
       Hash[*animals
         .group_by { |type, _| type }
-        .flat_map { |type, list| [type, list.count] }]
+        .flat_map { |type, list|
+          [type, list.count]
+        }
+      ]
     end
 
 !SLIDE small
