@@ -1,0 +1,670 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Ruby Functional Methods</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
+
+  <link rel="stylesheet" href=".//css/reset.css" type="text/css"/>
+
+  
+
+  <link type="text/css" href=".//css/fg.menu.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href=".//css/theme/ui.all.css" media="screen" rel="stylesheet" />
+  <link type="text/css" href=".//css/sh_style.css" rel="stylesheet" />
+  <link type="text/css" href=".//css/tipsy.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href=".//css/showoff.css" type="text/css"/>
+
+  <script type="text/javascript" src=".//js/jquery-1.4.2.min.js"></script>
+  <script type="text/javascript" src=".//js/jquery.cycle.all.js"></script>
+	<script type="text/javascript" src=".//js/jquery-print.js"></script>
+  <script type="text/javascript" src=".//js/jquery.batchImageLoad.js"></script>
+  <script type="text/javascript" src=".//js/jquery.parsequery.min.js"></script>
+  <script type="text/javascript" src=".//js/jquery.doubletap-0.1.js"></script>
+  <script type="text/javascript" src=".//js/jquery.tipsy.js"></script>
+
+  <script type="text/javascript" src=".//js/fg.menu.js"></script>
+  <script type="text/javascript" src=".//js/showoff.js"></script>
+  <script type="text/javascript" src=".//js/jTypeWriter.js"> </script>
+  <script type="text/javascript" src=".//js/sh_main.min.js"></script>
+  <script type="text/javascript" src=".//js/core.js"></script>
+  <script type="text/javascript" src=".//js/showoffcore.js"></script>
+  <script type="text/javascript" src=".//js/coffee-script.js"></script>
+
+  
+    
+      <script type="text/javascript" src=".//js/sh_lang/sh_ruby.min.js"></script>
+    
+  
+
+  
+
+  
+
+  <script type="text/javascript">
+    $(function(){
+      setupPreso(false, './');
+    });
+
+    editUrl  = "";
+  </script>
+
+</head>
+
+<body>
+
+<a tabindex="0" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="navmenu"><span class="ui-icon ui-icon-triangle-1-s"></span>slides</a>
+<div id="navigation" class="hidden"></div>
+<a tabindex="1" href="#search-engines" class="fg-button fg-button-icon-right ui-widget ui-state-default ui-corner-all" id="stylemenu"><span class="ui-icon ui-icon-triangle-1-s"></span>styles</a>
+<div id="stylepicker" class="hidden"></div>
+
+
+<div id="help">
+  <table>
+    <tr><td class="key">z, ?</td><td>toggle help (this)</td></tr>
+    <tr><td class="key">space, &rarr;</td><td>next slide</td></tr>
+    <tr><td class="key">shift-space, &larr;</td><td>previous slide</td></tr>
+    <tr><td class="key">b</td><td>blank screen</td></tr>
+    <tr><td class="key">d</td><td>toggle debug mode</td></tr>
+    <tr><td class="key">## &lt;ret&gt;</td><td>go to slide #</td></tr>
+    <tr><td class="key">c, t</td><td>table of contents (vi)</td></tr>
+    <tr><td class="key">f</td><td>toggle footer</td></tr>
+    <tr><td class="key">g</td><td>toggle follow</td></tr>
+    <tr><td class="key">r</td><td>reload slides</td></tr>
+    <tr><td class="key">n</td><td>toggle notes</td></tr>
+    <tr><td class="key">p</td><td>run preshow</td></tr>
+    <tr><td class="key">P</td><td>toggle pause</td></tr>
+    <tr><td class="key">s</td><td>choose style</td></tr>
+  </table>
+</div>
+
+<div class="buttonNav">
+  <input type="submit" onClick="prevStep();" value="prev"/>
+  <input type="submit" onClick="nextStep();" value="next"/>
+</div>
+
+<div id="preso"><center>loading presentation...</center></div>
+<div id="footer">
+  <span id="followMode"></span>
+  <span id="slideInfo"></span>
+  <span id="debugInfo"></span>
+  <span id="notesInfo"></span>
+  <span id="slideFilename"></span>
+  <img id="disconnected" src=".//css/disconnected.png" />
+</div>
+
+<div id="slides" class="offscreen" style="display:none;">
+<html><body>
+<div id="intro/0_intro" class="slide " data-transition="none">
+<div class="content " ref="intro/0_intro">
+<h1>Intro to Functional Ruby</h1>
+
+<p>Kyle Shipley</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="intro/1_why" class="slide bullet smaller" data-transition="none">
+<div class="content bullet smaller" ref="intro/1_why">
+<h1>Why</h1>
+
+<ul>
+<li>Most code is incidentally complex
+
+<ul>
+<li>for loops</li>
+<li>return statements</li>
+<li>local variables</li>
+<li>side effects!</li>
+</ul>
+</li>
+<li>Declarative vs. imperative
+
+<ul>
+<li>What, not how</li>
+<li>Function composition</li>
+</ul>
+</li>
+<li>Easier to read
+
+<ul>
+<li>...Once you get used to it</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="intro/2_how" class="slide bullet smaller" data-transition="none">
+<div class="content bullet smaller" ref="intro/2_how/1">
+<h1>How?</h1>
+
+<pre class="sh_ruby"><code>class Team
+  include Enumerable
+
+  attr_accessor :members
+
+  def initialize
+    @members = []
+  end
+
+  def each &amp;block
+    @members.each{|member| block.call(member)}
+  end
+end</code></pre>
+
+<p>Code from <a href="http://kconrails.com/2010/11/30/ruby-enumerable-primer-part-1-the-basics/">http://kconrails.com/2010/11/30/ruby-enumerable-primer-part-1-the-basics/</a></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="intro/2_how" class="slide bullet" data-transition="none">
+<div class="content bullet" ref="intro/2_how/2">
+<p>Congratulations! You now have access to all of the methods we're about to discuss.</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="simple/0_intro" class="slide bullets" data-transition="none">
+<div class="content bullets" ref="simple/0_intro">
+<h1>The basics</h1>
+
+<ul>
+<li>all?</li>
+<li>any?</li>
+<li>none?</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="simple/1_all" class="slide " data-transition="none">
+<div class="content " ref="simple/1_all">
+<h1>all?</h1>
+
+<pre class="sh_ruby"><code>[2, 4, 6, 8].all?{ |n| n.even? }
+# =&gt; true
+
+[1, 2, 3, 4].all?{ |n| n.odd? }
+# =&gt; false
+
+[stalin, lenin].all?(&amp;:communist?)
+# =&gt; true</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="simple/2_any" class="slide " data-transition="none">
+<div class="content " ref="simple/2_any">
+<h1>any?</h1>
+
+<pre class="sh_ruby"><code>[1, 2, 3, 4].any?{ |n| n.even? }
+# =&gt; true
+
+[2, 4, 6, 8].any?{ |n| n.odd? }
+# =&gt; false
+
+[stalin, mccarthy].any?(&amp;:communist?)
+# =&gt; true</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="simple/3_none" class="slide " data-transition="none">
+<div class="content " ref="simple/3_none">
+<h1>none?</h1>
+
+<pre class="sh_ruby"><code>[2, 4, 6, 8].none?{ |n| n.odd? }
+# =&gt; true
+
+[1, 2, 3, 4].none?{ |n| n.even? }
+# =&gt; false
+
+[obama, clinton].none?(&amp;:communist?)
+# =&gt; raise MaybeCommunistException
+# I mean =&gt; true</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="simple/4_include" class="slide " data-transition="none">
+<div class="content " ref="simple/4_include">
+<h1>include?</h1>
+
+<pre class="sh_ruby"><code>[1, 2, 3, 4].include? 3
+# =&gt; true
+
+[1, 2, 3, 4].include? 5
+# =&gt; false</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="simple/5_why" class="slide small" data-transition="none">
+<div class="content small" ref="simple/5_why">
+<h1>Why</h1>
+
+<p>Take all?, for example. Java-ish Ruby:
+    @@@ ruby
+    def all_odd?(array)
+      array.each do |element|
+        return false unless element.odd?
+      end
+      return true
+    end</p>
+
+<p>Idiomatic Ruby version
+    @@@ ruby
+    array.all?(&amp;:odd?)</p>
+
+<p>Less code = win</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="sorting/0_intro" class="slide bullets" data-transition="none">
+<div class="content bullets" ref="sorting/0_intro">
+<h1>Sorting</h1>
+
+<ul>
+<li>sort</li>
+<li>sort_by</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="sorting/1_sort" class="slide " data-transition="none">
+<div class="content " ref="sorting/1_sort">
+<h1>sort</h1>
+
+<pre class="sh_ruby"><code>[3, 1, 2, 4].sort
+# =&gt; [1, 2, 3, 4]
+
+[3, 1, 2, 4].sort{ |a, b| b &lt;=&gt; a }
+# =&gt; [4, 3, 2, 1]</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="sorting/2_sort_by" class="slide " data-transition="none">
+<div class="content " ref="sorting/2_sort_by">
+<h1>sort_by</h1>
+
+<pre class="sh_ruby"><code>words = "The dog is brown".split
+
+words.sort_by{ |w| w.length }
+# =&gt; ['is', 'the', 'dog', 'brown']
+
+words.sort_by(&amp;:length)
+# =&gt; ['is', 'the', 'dog', 'brown']</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="sorting/3_why" class="slide bullet" data-transition="none">
+<div class="content bullet" ref="sorting/3_why">
+<h1>Why</h1>
+
+<ul>
+<li>I can't write an efficient sort without a textbook
+
+<ul>
+<li>Ruby uses quicksort internally</li>
+</ul>
+</li>
+<li>Use sort_by where possible (<a href="http://brandon.dimcheff.com/2009/11/18/rubys-sort-vs-sort-by.html">http://brandon.dimcheff.com/2009/11/18/rubys-sort-vs-sort-by.html</a>)</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="bread_and_butter/0_intro" class="slide bullets" data-transition="none">
+<div class="content bullets" ref="bread_and_butter/0_intro">
+<h1>Bread and butter</h1>
+
+<ul>
+<li>find/detect</li>
+<li>select</li>
+<li>reject</li>
+<li>map</li>
+<li>inject</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="bread_and_butter/1_find_detect" class="slide " data-transition="none">
+<div class="content " ref="bread_and_butter/1_find_detect">
+<h1>detect (aka find)</h1>
+
+<pre class="sh_ruby"><code>[2, 4, 5, 6].detect{ |n| n.odd? }
+# =&gt; 5
+
+[1, 3, 5, 7].detect{ |n| n.even? }
+# =&gt; nil
+
+[roosevelt, hitler, tojo].detect(&amp;:axis?)
+# =&gt; hitler</code></pre>
+
+<p>Warning! Rails overrides find for ActiveRecord proxies!</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="bread_and_butter/2_select" class="slide " data-transition="none">
+<div class="content " ref="bread_and_butter/2_select">
+<h1>select</h1>
+
+<pre class="sh_ruby"><code>[1, 2, 3, 4].select{ |n| n.even? }
+# =&gt; [2, 4]
+
+[1, 2, 3, 4].select{ |n| n &gt; 5 }
+# =&gt; []
+
+[tiger, britney, kim_k].select(&amp;:married?)
+# =&gt; [kim_k]</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="bread_and_butter/3_reject" class="slide " data-transition="none">
+<div class="content " ref="bread_and_butter/3_reject">
+<h1>reject</h1>
+
+<pre class="sh_ruby"><code>[1, 2, 3, 4].reject{ |n| n.even? }
+# =&gt; [1, 3]
+
+[1, 2, 3, 4].reject{ |n| n &gt; 5 }
+# =&gt; [1, 2, 3, 4]
+
+[astley, led_zep].reject(&amp;:unskilled?)
+# =&gt; [astley]</code></pre>
+
+<p><a href="http://www.youtube.com/watch?v=oHg5SJYRHA0">Interesting diagram of select/reject</a></p>
+</div>
+</div>
+</body></html><html><body>
+<div id="bread_and_butter/4_map" class="slide " data-transition="none">
+<div class="content " ref="bread_and_butter/4_map">
+<h1>map (aka collect)</h1>
+
+<pre class="sh_ruby"><code>(1..5).map{ |i| i * 3 }
+# =&gt; [3, 6, 9, 12, 15]
+
+DTEmployee.all.map(&amp;:ssn)
+# =&gt; ['123-12-1234', '987-98-9876']
+
+# Please fill in your own and commit it
+# to the repository, along with a
+# credit card number. Just for funsies.</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="bread_and_butter/5_inject" class="slide small" data-transition="none">
+<div class="content small" ref="bread_and_butter/5_inject">
+<h1>inject (aka reduce)</h1>
+
+<pre class="sh_ruby"><code>DTEmployee.all.inject({}) do |memo, emp|
+  memo[emp.name] = emp.clients.count
+  memo
+end
+
+# =&gt; {
+#  "Jason" =&gt; 10_000,
+#  "Bob" =&gt; 5,
+#  "Chad" =&gt; -2
+# }</code></pre>
+
+<p>Don't forget to return the memo!</p>
+
+<p>Really useful for converting arrays to hashes!</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="bread_and_butter/6_why" class="slide small" data-transition="none">
+<div class="content small" ref="bread_and_butter/6_why/1">
+<h1>Why</h1>
+
+<p>Java-esque detect:
+    @@@ ruby
+    match = nil
+    for el in array do
+      if el.matches_condition?
+        match = el
+        break
+      end
+    end</p>
+
+<p>Idiomatic:
+    @@@ ruby
+    array.detect(&amp;:matches_condition?)</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="bread_and_butter/6_why" class="slide bullet smaller" data-transition="none">
+<div class="content bullet smaller" ref="bread_and_butter/6_why/2">
+<h1>Why</h1>
+
+<ul>
+<li>find/detect, select, reject, map/collect, and inject/reduce refer to specific concepts
+
+<ul>
+<li>select, reject = apply a filter</li>
+<li>map = apply a function each element and collect the results</li>
+<li>inject = collapse a list into a single value</li>
+</ul>
+</li>
+<li>less state
+
+<ul>
+<li>not needed most of the time</li>
+</ul>
+</li>
+<li>concurrency
+
+<ul>
+<li>map/reduce easy to distribute across multiple boxes</li>
+<li>Hadoop, Storm, etc.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="good_to_know/0_intro" class="slide bullets" data-transition="none">
+<div class="content bullets" ref="good_to_know/0_intro">
+<h1>More specialized operators</h1>
+
+<ul>
+<li>group_by</li>
+<li>partition</li>
+<li>zip</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="good_to_know/1_group_by" class="slide " data-transition="none">
+<div class="content " ref="good_to_know/1_group_by">
+<h1>group_by</h1>
+
+<pre class="sh_ruby"><code>[1, 2, 3, 4].group_by(&amp;:odd?)
+# =&gt; {true=&gt;[1, 3], false=&gt;[2, 4]} 
+
+SpringfieldResident.all.group_by(&amp;:race)
+# =&gt; {
+#   "White / Yellow" =&gt; [lenny],
+#   "Black" =&gt; [carl, lou],
+#   "Indian" =&gt; [apu]
+# }</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="good_to_know/2_partition" class="slide " data-transition="none">
+<div class="content " ref="good_to_know/2_partition">
+<h1>partition</h1>
+
+<pre class="sh_ruby"><code>[1, 2, 3, 4].partition(&amp;:odd?)
+# =&gt; [[1, 3], [2, 4]]
+
+iphones = [i_1, i_3g, i_3gs, i_4, i_4s]
+iphones.partition(&amp;:obsolete?)
+# =&gt; [[i_1, i_3g, i_3gs, i_4], [i_4s]]</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="good_to_know/3_zip" class="slide " data-transition="none">
+<div class="content " ref="good_to_know/3_zip">
+<h1>zip</h1>
+
+<pre class="sh_ruby"><code>[1, 2, 3].zip([4, 5, 6])
+# =&gt; [[1, 4], [2, 5], [3, 6]]
+
+[1, 2, 3].zip([4, 5, 6], [7, 8, 9])
+# =&gt; [[1, 4, 7], [2, 5, 8], [3, 6, 9]]</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide " data-transition="none">
+<div class="content " ref="examples/0_intro/1">
+<h1>Examples</h1>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide small" data-transition="none">
+<div class="content small" ref="examples/0_intro/2">
+<h1>String parsing</h1>
+
+<pre class="sh_ruby"><code>records = File
+  .open("file", 'r')
+  .readlines
+  .map(&amp;:chomp)
+  .map{ |line| line.gsub("-", "_" ).split("\t") }</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide " data-transition="none">
+<div class="content " ref="examples/0_intro/3">
+<h2>Warning! Real-world examples from Giggil.</h2>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide smaller" data-transition="none">
+<div class="content smaller" ref="examples/0_intro/4">
+<h1>Exclude non-media results</h1>
+
+<pre class="sh_ruby"><code>MEDIA = ["DVD", "Music", "Software", "Video Games", "Book"]
+
+filtered_results = search
+  .results
+  .select{ |r| MEDIA.include? r[:product_group] }</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide smaller" data-transition="none">
+<div class="content smaller" ref="examples/0_intro/5">
+<p><strong>Amazon Shipping Fee Calculations</strong></p>
+
+<p>An item is <strong>overweight</strong> if (1) weight or dimensional weight &gt; 20, (2) the shortest dimension is greater than 8, (3) the median dimension is greater than 14, OR (4) the longest dimension is greater than 20.</p>
+
+<pre class="sh_ruby"><code>MAX_WEIGHT = 20
+MAX_DIMENSIONS = [8, 14, 18]
+DIMENSIONAL_WEIGHT_FACTOR = 194
+
+def oversized?
+  weight &gt; MAX_WEIGHT ||
+    dimensions.sort
+              .zip(MAX_DIMENSIONS)
+              .any?{ |arr| arr[0] &gt; arr[1] }
+end
+
+def dimensional_weight
+  dimensions.inject(&amp;:*) / DIMENSIONAL_WEIGHT_FACTOR
+end
+
+def shipping_weight
+  [dimensional_weight, weight].max
+end</code></pre>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide smaller" data-transition="none">
+<div class="content smaller" ref="examples/0_intro/6">
+<h1>Sanity check emails</h1>
+
+<ol>
+<li>Find all the methods beginning with check.</li>
+<li>Sort them so that the order is consistent.</li>
+<li>Call each method and store its result.</li>
+</ol>
+
+<p>The Code
+    @@@ ruby
+    def generate<em>email
+      lines = methods
+        .select{ |m| m =~ /check</em>/ }
+        .sort
+        .inject([]){ |memo, m| memo &lt;&lt; send(m).join(': ') }</p>
+
+<pre><code>  log_lines lines
+  StatsMailer.deliver_sanity_check lines
+end
+</code></pre>
+
+<p><strong>Note</strong>: Because &lt;&lt; returns an array, I don't have to explicitly return my memo. (There's also reflection! Exciting and/or dangerous!)</p>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide smaller" data-transition="none">
+<div class="content smaller" ref="examples/0_intro/7">
+<h1>Bonus - Metaprogramming!</h1>
+
+<p>This is how we added some helper methods like create_manual_scan_audit_task and create_inspection_audit_task.</p>
+
+<pre class="sh_ruby"><code>AuditTaskType.all.map(&amp;:name).each do |task_type|
+  define_method "create_#{task_type}_audit_task" do
+    return unless current_user.auditable?
+    @audit_task = current_user.current_audit_period \
+      .add_task! :task_type =&gt; task_type
+  end
+end</code></pre>
+
+<p>(Normally you wouldn't want to call map(&amp;:name) on an ActiveRecord list, but there's only about 15 AuditTaskTypes. If you have a bigger list, use ActiveRecord::Base.connection.select_values instead.)  </p>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide small" data-transition="none">
+<div class="content small" ref="examples/0_intro/8">
+<h1>Summary</h1>
+
+<ul>
+<li>Enumerable is great</li>
+<li>Use these methods liberally</li>
+<li>Fewer LOC = more maintainable software
+
+<ul>
+<li>But no golfing!</li>
+</ul>
+</li>
+<li>State is overrated
+
+<ul>
+<li>Especially as systems become more concurrent</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide " data-transition="none">
+<div class="content " ref="examples/0_intro/9">
+<h1>Enjoy your hammer!</h1>
+</div>
+</div>
+</body></html><html><body>
+<div id="examples/0_intro" class="slide " data-transition="none">
+<div class="content " ref="examples/0_intro/10">
+<h1>Questions?</h1>
+
+<p>Presentation by showoff (<a href="https://github.com/schacon/showoff">https://github.com/schacon/showoff</a>)</p>
+
+<p>Source available at <a href="https://github.com/shipstar/presentations">https://github.com/shipstar/presentations</a></p>
+
+<p>A better presentation at <a href="http://speakerdeck.com/u/tomstuart/p/thinking-functionally-in-ruby">http://speakerdeck.com/u/tomstuart/p/thinking-functionally-in-ruby</a></p>
+</div>
+</div>
+</body></html></div>
+<div id="pauseScreen">
+  PAUSED
+</div>
+
+</body>
+</html>

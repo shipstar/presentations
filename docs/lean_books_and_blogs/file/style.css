@@ -1,0 +1,37 @@
+.content .footnote {
+  font-size: 18px;
+  margin-top: 12px;
+  color: #666;
+}
+
+p + .footnote, h1 + .footnote, h2 + .footnote {
+  text-align: center;
+}
+
+img {
+  max-width: 800px;
+}
+
+h1 {
+  color: #AA3939;
+}
+
+p.huge {
+  font-size: 128px;
+  margin: 0;
+}
+
+p.point, p.explanation {
+  margin: 0 0 0 40px;
+}
+
+p.point {
+  color: #267171;
+  text-align: left;
+  margin-top: 1em;
+}
+
+p.explanation {
+  font-size: 1.5em;
+  text-align: left;
+}
